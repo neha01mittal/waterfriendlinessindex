@@ -25,7 +25,7 @@ contract WaterFriendliness {
     Data[] data_list;
     Transaction[] transaction_list;
 
-    function data_audit(uint id) returns(
+    function data_audit(uint id) public returns(
         uint energyperm3,
         uint costperm3,
         uint tds,
@@ -41,7 +41,7 @@ contract WaterFriendliness {
         sender = data_list[id].sender;
     }
 
-    function transaction_audit(uint id) returns(string buyer,
+    function transaction_audit(uint id) public returns(string buyer,
         string companyName,
         uint value,
         uint epoch,
@@ -67,7 +67,7 @@ contract WaterFriendliness {
     }
 
     function addTransaction(string _buyer, string _companyName, uint _value, uint _epoch, bool _isBuy,
-        uint _quantity) public returns (uint) {
+        uint _quantity, uint _id) public returns (uint) {
 
         transaction_list.push(Transaction({
             buyer: _buyer,
@@ -76,14 +76,14 @@ contract WaterFriendliness {
             epoch: _epoch,
             isBuy: _isBuy,
             quantity: _quantity,
-            id: getTransactionCount() + 1,
+            id: _id,
             sender: msg.sender
         }));
 
-        return getTransactionCount() + 1;
+        return _id;
     }
 
-    function addData(uint _energyperm3, uint _costperm3, uint _tds, string _companyName, uint _epoch)
+    function addData(uint _energyperm3, uint _costperm3, uint _tds, string _companyName, uint _epoch, uint _id)
 public returns (uint index, uint bid){
         data_list.push(Data({
             energyperm3: _energyperm3,
@@ -91,12 +91,12 @@ public returns (uint index, uint bid){
             tds: _tds,
             companyName: _companyName,
             epoch: _epoch,
-            id: getDataCount() + 1,
+            id: _id,
             sender: msg.sender
         }));
 
 
         index = (3.0*1000000- ((_energyperm3*1000000/12.0) + (_costperm3*1000000/100.0) + (_tds*1000000/30000.0)))*100.0/(1000000*3.0);
-        bid = getDataCount() +1;
+        bid = _id;
     }
 }

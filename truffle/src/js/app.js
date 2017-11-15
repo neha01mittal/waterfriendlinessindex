@@ -1,28 +1,70 @@
 App = {
     web3Provider: null,
     contractAddress: "0x...",
-    contractABI: [{"constant":false,"inputs":[{"name":"_energyperm3","type":"uint8"},{"name":"_costperm3","type":"uint8"},{"name":"_tds","type":"uint8"},{"name":"_companyName","type":"address"},{"name":"_epoch","type":"uint8"}],"name":"addData","outputs":[{"name":"","type":"uint256"},{"name":"","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_buyer","type":"address"},{"name":"_companyName","type":"address"},{"name":"_value","type":"uint8"},{"name":"_epoch","type":"uint8"},{"name":"_isBuy","type":"bool"},{"name":"_quantity","type":"uint8"}],"name":"addTransaction","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"function"}],
+    contractABI: [{
+        "constant": false,
+        "inputs": [{"name": "_energyperm3", "type": "uint8"}, {"name": "_costperm3", "type": "uint8"}, {
+            "name": "_tds",
+            "type": "uint8"
+        }, {"name": "_companyName", "type": "address"}, {"name": "_epoch", "type": "uint8"}],
+        "name": "addData",
+        "outputs": [{"name": "", "type": "uint256"}, {"name": "", "type": "string"}],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }, {
+        "constant": false,
+        "inputs": [{"name": "_buyer", "type": "address"}, {
+            "name": "_companyName",
+            "type": "address"
+        }, {"name": "_value", "type": "uint8"}, {"name": "_epoch", "type": "uint8"}, {
+            "name": "_isBuy",
+            "type": "bool"
+        }, {"name": "_quantity", "type": "uint8"}],
+        "name": "addTransaction",
+        "outputs": [{"name": "", "type": "string"}],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }],
     walletaddress: "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
 
     contracts: {},
 
     init: function () {
+        // Load pets.
+        $.getJSON('../pets.json', function (data) {
+            var petsRow = $('#petsRow');
+            var petTemplate = $('#petTemplate');
+
+            for (i = 0; i < data.length; i++) {
+                petTemplate.find('.panel-title').text(data[i].name);
+                petTemplate.find('img').attr('src', data[i].picture);
+                petTemplate.find('.pet-breed').text(data[i].breed);
+                petTemplate.find('.pet-age').text(data[i].age);
+                petTemplate.find('.pet-location').text(data[i].location);
+                petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
+
+                petsRow.append(petTemplate.html());
+            }
+        });
+
         return App.initWeb3();
     },
-    getCookie: function(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
+    getCookie: function (cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
         }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
+        return "";
     },
     initWeb3: function () {
         // Is there is an injected web3 instance?
@@ -62,7 +104,7 @@ App = {
 
         App.contracts.WaterFriendliness.deployed().then(function (instance) {
             waterInstance = instance;
-            return waterInstance.addData.call(energy, cost, tds, companyname, epoch, {from: App.walletaddress});
+            return waterInstance.addData.call(3, 50, 20000, 'Appl', 2, 54, {from: App.walletaddress});
         }).then(function (result) {
             console.log('RESULT');
             console.log(result);
@@ -73,21 +115,16 @@ App = {
     },
     handleInvest: function () {
         var waterInstance;
-        Date.prototype.getUnixTime = function() { return this.getTime()/1000|0 };
-        if(!Date.now) Date.now = function() { return new Date(); }
-        Date.time = function() { return Date.now().getUnixTime(); }
 
-        // Get the current time as Unix time
-        var currentUnixTime = Date.time();
-        currentUnixTime = Date.now().getUnixTime(); // same as above
         App.contracts.WaterFriendliness.deployed().then(function (instance) {
             waterInstance = instance;
-            return waterInstance.addTransaction.call( getCookie('user_id'),  getCookie('company'), getCookie('val'), currentUnixTime, getCookie('type')=='buy',
-                getCookie('quantity'), {from: App.walletaddress});
+            currentUnixTime = Math.round((new Date()).getTime() / 1000);
+            return waterInstance.addTransaction.call(App.getCookie('user_id'), App.getCookie('company'), App.getCookie('val'), currentUnixTime, App.getCookie('type') == 'buy',
+                App.getCookie('quantity'), Math.random(), {from: App.walletaddress});
         }).then(function (result) {
             console.log('buy/ sell');
             console.log(result);
-            document.cookie = "transactionReply="+result;
+            document.cookie = "transactionReply=" + result;
         }).catch(function (err) {
             console.log(err.message);
         });
@@ -124,5 +161,15 @@ App = {
 $(function () {
     $(window).load(function () {
         App.init();
+    });
+});
+
+$(function(){
+    $('#clickme').click(function(){
+        $('#uploadme').click();
+    });
+
+    $('#uploadme').change(function(){
+        $('#filename').val($(this).val());
     });
 });
