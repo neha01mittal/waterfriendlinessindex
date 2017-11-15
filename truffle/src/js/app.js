@@ -32,23 +32,7 @@ App = {
     contracts: {},
 
     init: function () {
-        // Load pets.
-        $.getJSON('../pets.json', function (data) {
-            var petsRow = $('#petsRow');
-            var petTemplate = $('#petTemplate');
-
-            for (i = 0; i < data.length; i++) {
-                petTemplate.find('.panel-title').text(data[i].name);
-                petTemplate.find('img').attr('src', data[i].picture);
-                petTemplate.find('.pet-breed').text(data[i].breed);
-                petTemplate.find('.pet-age').text(data[i].age);
-                petTemplate.find('.pet-location').text(data[i].location);
-                petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
-
-                petsRow.append(petTemplate.html());
-            }
-        });
-
+        
         return App.initWeb3();
     },
     getCookie: function (cname) {
@@ -101,13 +85,27 @@ App = {
 
     handleUpload: function () {
         var waterInstance;
-
         App.contracts.WaterFriendliness.deployed().then(function (instance) {
             waterInstance = instance;
-            return waterInstance.addData.call(3, 50, 20000, 'Appl', 2, 54, {from: App.walletaddress});
+            currentUnixTime = Math.round((new Date()).getTime() / 1000);
+            return waterInstance.addData.call(App.getCookie('epm3'), App.getCookie('cpm3'), App.getCookie('tds'), App.getCookie('company_name'), currentUnixTime, Math.round(Math.random()*100000), {from: App.walletaddress});
         }).then(function (result) {
-            console.log('RESULT');
-            console.log(result);
+            document.cookie="newWFI="+result[0].c[0];
+            document.cookie="bkcnUploadId="+result[1].c[0];
+            $.ajax({
+                type:'POST',
+                url:'http://df482d16.ngrok.io/upload/',
+                data: {
+                    'company_id':App.getCookie('company_id'),
+                    'wfi':result[0].c[0]
+                },
+                success: function(data){
+                  if (!data.error){
+                    $('#confirmed').html('Uploaded to Blockchain!');
+                    setTimeout(function(){ window.location = '/companyLanding.html'; }, 1500);
+                  }
+              }
+            })
             //return App.markAdopted();
         }).catch(function (err) {
             console.log(err.message);
@@ -120,7 +118,7 @@ App = {
             waterInstance = instance;
             currentUnixTime = Math.round((new Date()).getTime() / 1000);
             return waterInstance.addTransaction.call(App.getCookie('user_id'), App.getCookie('company'), App.getCookie('val'), currentUnixTime, App.getCookie('type') == 'buy',
-                App.getCookie('quantity'), Math.random(), {from: App.walletaddress});
+                App.getCookie('quantity'), Math.round(Math.random()*100000), {from: App.walletaddress});
         }).then(function (result) {
             console.log('buy/ sell');
             console.log(result);
