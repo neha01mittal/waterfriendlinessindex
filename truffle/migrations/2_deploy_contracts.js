@@ -1,5 +1,5 @@
-var Adoption = artifacts.require("Adoption");
+var WaterFriendliness  = artifacts.require("WaterFriendliness");
 
 module.exports = function(deployer) {
-  deployer.deploy(Adoption);
+    deployer.deploy(WaterFriendliness);
 };
