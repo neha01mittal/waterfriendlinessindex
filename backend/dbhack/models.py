@@ -8,6 +8,14 @@ class User(models.Model):
     name = models.CharField(max_length=256)
     credit = models.FloatField()
 
+    def coins_of(self, company):
+        transactions = self.transactions.filter(company=company)
+        coins = 0
+        for transaction in transactions.iterator():
+            coins += transaction.quantity
+
+        return coins
+
     def __str__(self):
         return self.name
 

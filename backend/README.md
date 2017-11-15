@@ -62,7 +62,7 @@ Get the portfolio of one specific user.
 
 RETURN:
 
-    {"transactions": [{"block_address": "0x111", "company": "Apple", "wfi_at_buy": "0.0", "value_at_buy": "10.5", "time": "2017-11-14 16:24:36.477216+00:00"}]}
+    {"transactions": [{"wfi_at_buy": "0.0", "company": "Apple", "block_address": "0x111", "time": "2017-11-14 18:36:06.275138+00:00", "value_at_buy": "12.5", "accumulation": -50.0, "quantity": -4}]}
 
 
 COMPANY
@@ -73,11 +73,11 @@ COMPANY
 POST: upload/
 
  - company_id
- - upload file 
+ - wfi
  
-Upload a .csv file in order to add new rating for a company.
+Update the database with the new calculated wfi.
 
-    curl -v -F "company_id=1" -F upload=@testfile.csv 0.0.0.0:8000/upload/
+     curl -d "company_id=1&wki=60.0" -X POST 0.0.0.0:8000/upload/
 
 RETURN:
 
