@@ -1,0 +1,20 @@
+@import url(https://fonts.googleapis.com/css?family=Vibur);
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  font-family: arial;
+}
+h1 {
+  color: white;
+  text-align: center;
+  font-family: 'Vibur', cursive;
+  font-size: 50px;
+}
+
+
+.main-content {
+	background :#0087ff;
+	color:white;
+	text-align: left;
+}
