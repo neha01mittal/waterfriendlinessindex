@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Water Friendliness Index</title>
+  
+  
+  <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+  <link rel='stylesheet' href='css/bootstrap.min.css'>
+      <link rel="stylesheet" href="css/home.css">
+      <link rel="stylesheet" href="css/transact.css">
+
+  
+</head>
+
+<body>
+  <div class="login-form">
+     <h1>Water Friendliness Index</h1> <br/>
+     <div class="row">
+      <div class="col-sm-6">
+        <h3 id="company-name"></h3>
+        <p>Value: <b id="value"></b></p> 
+        <p>Type: <b id="type"></b></p>
+      </div>
+      <div class="col-sm-6">
+        <h3 id="username"></h3>
+        <b id="credits"></b>
+      </div>
+      </div>
+     <div class="form-group ">
+       <input type="number" class="form-control" placeholder="1" min="1" id="quantity">
+     </div>
+     <div class="form-group">
+        
+     </div>     
+     <button type="button" class="btn btn-success btn-transaction" onclick="transact();">Transact</button>
+     
+    
+   </div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script  src="js/transact.js"></script>
+    <script  src="js/app.js"></script>
+
+</body>
+</html>
