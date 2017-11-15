@@ -102,7 +102,7 @@ App = {
                 success: function(data){
                   if (!data.error){
                     $('#confirmed').html('Uploaded to Blockchain!');
-                    setTimeout(function(){ window.location = '/companyLanding.html'; }, 1500);
+                    setTimeout(function(){ window.location = '/waterfriendlinessindex/truffle/src/companyLanding.html'; }, 1500);
                   }
               }
             })

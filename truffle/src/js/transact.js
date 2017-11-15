@@ -35,7 +35,7 @@ function transact(){
                 success: function(data){
                   if (!data.error){
                   document.cookie="credits="+data.credit;
-                  window.location="/portfolio.html";
+                  window.location="/waterfriendlinessindex/truffle/src/portfolio.html";
                   }
                   else {
                     window.location="/userLanding.html";

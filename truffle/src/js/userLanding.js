@@ -11,7 +11,7 @@ $.get('http://pollithy.com:8000/companydata/', function(data) {
         }
         htmlContent+= '<div class="row"><div class="col-sm-2"><img src="'+data[i].logo+'" width="32px" height="32px"></div><div class="col-sm-2">'+data[i].name+'</div><div class="col-sm-3"><div id="wfiSparkline-'+i;
         htmlContent+='"></div></div><div class="col-sm-3"><div id="valSparkline-'+i;
-        htmlContent += '"></div></div><div class="col-sm-2"><button class="btn btn-success" onclick="document.cookie=\'type=buy\'; document.cookie=\'company='+data[i].name+'\'; document.cookie=\'val='+val[val.length-1]+'\';document.cookie=\'company_id='+data[i].id+'\';window.location=\'/transact.html\';">Buy</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-danger" onclick="document.cookie=\'type=sell\'; document.cookie=\'company_id='+data[i].id+'\';document.cookie=\'company='+data[i].name+'\'; document.cookie=\'val='+val[val.length-1]+'\';window.location=\'/transact.html\';">Sell</button></div></div><br/>';
+        htmlContent += '"></div></div><div class="col-sm-2"><button class="btn btn-success" onclick="document.cookie=\'type=buy\'; document.cookie=\'company='+data[i].name+'\'; document.cookie=\'val='+val[val.length-1]+'\';document.cookie=\'company_id='+data[i].id+'\';window.location=\'/waterfriendlinessindex/truffle/src/transact.html\';">Buy</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-danger" onclick="document.cookie=\'type=sell\'; document.cookie=\'company_id='+data[i].id+'\';document.cookie=\'company='+data[i].name+'\'; document.cookie=\'val='+val[val.length-1]+'\';window.location=\'/waterfriendlinessindex/truffle/src/transact.html\';">Sell</button></div></div><br/>';
       }
       document.getElementById('index').innerHTML = htmlContent;
 

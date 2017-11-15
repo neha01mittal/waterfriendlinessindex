@@ -12,7 +12,7 @@
                   document.cookie = 'user_id='+data.user_id;
                   document.cookie = 'credits='+data.credit;
                   document.cookie = 'username='+document.getElementById("username").value;
-                  window.location='/userLanding.html';
+                  window.location='/waterfriendlinessindex/truffle/src/userLanding.html';
                 }
               });
             }

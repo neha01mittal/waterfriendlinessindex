@@ -12,7 +12,7 @@
                   console.log(data);
                   document.cookie = 'company_id='+data.company_id;
                   document.cookie = 'company_name='+document.getElementById("username").value;
-                  window.location='/companyLanding.html';
+                  window.location='/waterfriendlinessindex/truffle/src/companyLanding.html';
                 }
               });
             }
