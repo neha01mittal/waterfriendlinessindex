@@ -15,7 +15,7 @@ $(function() {
     }
     return "";
 }
-
+$('#company-name').text(getCookie('company_name'));
 var fileData = '';
 $('#csvfile').on('change', function(data){
 	var file = document.getElementById('csvfile').files[0];
