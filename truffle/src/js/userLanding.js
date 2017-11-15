@@ -1,6 +1,6 @@
 $(function() {
   $(window).load(function() {
-$.get('http://df482d16.ngrok.io/companydata/', function(data) {
+$.get('http://pollithy.com:8000/companydata/', function(data) {
       htmlContent = '';
       for (i = 0; i < data.length; i ++) {
         wfi=[];

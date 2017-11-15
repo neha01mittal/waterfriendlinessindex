@@ -2,7 +2,7 @@ Date.prototype.getUnixTime = function() { return this.getTime()/1000|0 };
 if(!Date.now) Date.now = function() { return new Date(); }
 Date.time = function() { return Date.now().getUnixTime(); }
 
-$.get('http://df482d16.ngrok.io/portfolio/'+getCookie('user_id'), function(data){
+$.get('http://pollithy.com:8000/portfolio/'+getCookie('user_id'), function(data){
 	chartData = [];
 	for( var i=0; i<data.transactions.length; i++){
 		var someDate = new Date(data.transactions[i].time);

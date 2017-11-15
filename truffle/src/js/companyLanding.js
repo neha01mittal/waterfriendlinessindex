@@ -31,7 +31,7 @@ $('#csvfile').on('change', function(data){
 });
 Date.prototype.getUnixTime = function() { return this.getTime()/1000|0 };
 console.log(getCookie('company_id'));
-	$.get('http://df482d16.ngrok.io/companydata/'+getCookie('company_id'), function(data) {
+	$.get('http://pollithy.com:8000/companydata/'+getCookie('company_id'), function(data) {
     	  $('#company-name').html(data.name);
     	  wfi=[];
     	  val=[];

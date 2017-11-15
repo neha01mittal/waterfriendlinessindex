@@ -4,7 +4,7 @@
               $('.log-status').removeClass('wrong-entry');
               $.ajax({
                 type: "POST",
-                url: 'http://df482d16.ngrok.io/companylogin/',
+                url: 'http://pollithy.com:8000/companylogin/',
                 data: {
                   'company_name': document.getElementById("username").value
                 },

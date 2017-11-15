@@ -24,7 +24,7 @@ function getCookie(cname) {
 function transact(){
 	$.ajax({
 		type: "POST",
-                url: 'http://df482d16.ngrok.io/transaction/',
+                url: 'http://pollithy.com:8000/transaction/',
                 data: {
                   'quantity': getCookie('type')=='buy'? 1 : -1 * (document.getElementById('quantity').value == "" ? 1 : parseInt(document.getElementById('quantity').value)),
                   'company_id': getCookie('company_id'),

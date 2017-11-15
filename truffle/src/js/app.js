@@ -94,7 +94,7 @@ App = {
             document.cookie="bkcnUploadId="+result[1].c[0];
             $.ajax({
                 type:'POST',
-                url:'http://df482d16.ngrok.io/upload/',
+                url:'http://pollithy.com:8000/upload/',
                 data: {
                     'company_id':App.getCookie('company_id'),
                     'wfi':result[0].c[0]
