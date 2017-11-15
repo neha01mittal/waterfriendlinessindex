@@ -38,7 +38,7 @@ function transact(){
                   window.location="/waterfriendlinessindex/truffle/src/portfolio.html";
                   }
                   else {
-                    window.location="/userLanding.html";
+                    window.location="/waterfriendlinessindex/truffle/src/userLanding.html";
                   }
                 }
 	})
