@@ -26,14 +26,20 @@ function transact(){
 		type: "POST",
                 url: 'http://df482d16.ngrok.io/transaction/',
                 data: {
-                  'quantity': document.getElementById('quantity').value == "" ? 1 : parseInt(document.getElementById('quantity').value),
+                  'quantity': getCookie('type')=='buy'? 1 : -1 * (document.getElementById('quantity').value == "" ? 1 : parseInt(document.getElementById('quantity').value)),
                   'company_id': getCookie('company_id'),
                   'value_at_buy':getCookie('val'),
                   'user_id':getCookie('user_id'),
-                  'block_address':  
-
+                  'block_address':  getCookie('transactionReply')
                 },
                 success: function(data){
+                  if (!data.error){
+                  document.cookie="credits="+data.credit;
+                  window.location="/portfolio.html";
+                  }
+                  else {
+                    window.location="/userLanding.html";
+                  }
                 }
 	})
 }

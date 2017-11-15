@@ -16,7 +16,7 @@ $.get('http://df482d16.ngrok.io/portfolio/'+getCookie('user_id'), function(data)
 		htmlContent+= '<div class="row" style="color:#0087ff"><div class="panel panel-info"><div class="panel-heading">'+data.assets[i].name
 		+'</div><div class="panel-body"><div class="row"><div class="col-sm-4">Valuation</div><div class="col-sm-4">WFI</div><div class="col-sm-4">Quantity</div></div><b><div class="row"><div class="col-sm-4">'
 		+Number((data.assets[i].latest_valuation).toFixed(1))+'</div><div class="col-sm-4">'+Number((data.assets[i].value).toFixed(1))+'</div><div class="col-sm-4">'+
-		data.assets[i].quantity+'</div></div></b></div></div>';
+		data.assets[i].quantity+'</div></div></b></div></div></div>';
 	}
 	$('#portfolio').html(htmlContent);
 
